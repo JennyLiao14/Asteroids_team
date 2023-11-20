@@ -37,9 +37,34 @@ public class PVector {
     }
     public void setAngle(double angle) {      //angle in deg  //find new values of x and y, given fixed value of size
         double size = this.getSize();
+        while (angle <= 0) {
+            double temp = Math.abs(angle);
+            angle = 360 - temp;
+        }
+        while (angle >=360) {
+            angle -= 360;
+        }
+
         double angleinRad = Math.toRadians(angle);
-        this.x = size * Math.cos(angle);
-        this.y = size * Math.sin(angle);
+
+        if (angle >= 0 && angle < 90) {
+            x = Math.abs(size * Math.cos(angleinRad));
+            y = Math.abs(size * Math.sin(angleinRad));
+        }
+        else if (angle >= 90 && angle < 180) {
+            x = -Math.abs(size * Math.cos(angleinRad));
+            y = Math.abs(size * Math.sin(angleinRad));
+        }
+        if (angle >= 180 && angle < 270) {
+            x = -Math.abs(size * Math.cos(angleinRad));
+            y = -Math.abs(size * Math.sin(angleinRad));
+        }
+        if (angle >= 270 && angle < 360) {
+            x = Math.abs(size * Math.cos(angleinRad));
+            y = -Math.abs(size * Math.sin(angleinRad));
+        }
+
+
     }
     public double getX() {
         return x;

@@ -20,7 +20,7 @@ import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
-public class Main extends Application {
+public class Main extends Application {     //contains graphics, inputs and game loop. Will call on LvlHandler and SceneHandler to set up the game after choices completed
 
     public static void main(String[] args) {
         launch(args); //auto call start
@@ -39,23 +39,7 @@ public class Main extends Application {
         context.fillRect(0,0,800,600);
 
         //testing classes (don't mind me)
-        System.out.println("factory testing");
-        ArrayList<Entity> temp = new ArrayList<>();
-        temp.add(AsteroidFactory.getAsteroid(2));
-        temp.add(AsteroidFactory.getAsteroid(3));
-        temp.add(EntityFactory.getEntity("Player",1));
-        for(int i = 0; i < temp.size(); i++) {
-            temp.get(i).move();
-        }
 
-        System.out.println(" ");
-        System.out.println("Random Testing");
-
-        NumberGenerator n = new NumberGenerator();
-        for(int i = 0; i < 6; i++) {
-            EntityFactory.getEntity("Asteroid",n.randomInt(1,3)).move();
-
-        }
 
 
         primaryStage.show();
