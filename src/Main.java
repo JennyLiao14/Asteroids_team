@@ -38,6 +38,26 @@ public class Main extends Application {
         context.setFill(Color.BLUE);
         context.fillRect(0,0,800,600);
 
+        //testing classes (don't mind me)
+        System.out.println("factory testing");
+        ArrayList<Entity> temp = new ArrayList<>();
+        temp.add(AsteroidFactory.getAsteroid(2));
+        temp.add(AsteroidFactory.getAsteroid(3));
+        temp.add(EntityFactory.getEntity("Player",1));
+        for(int i = 0; i < temp.size(); i++) {
+            temp.get(i).move();
+        }
+
+        System.out.println(" ");
+        System.out.println("Random Testing");
+
+        NumberGenerator n = new NumberGenerator();
+        for(int i = 0; i < 6; i++) {
+            EntityFactory.getEntity("Asteroid",n.randomInt(1,3)).move();
+
+        }
+
+
         primaryStage.show();
     }
 }

@@ -1,10 +1,10 @@
-public class Vector {
+public class PVector {
     private double x;       //tracks xPos
     private double y;       //tracks yPos
-    public Vector() {       //initial Vector position is 0, 0
+    public PVector() {       //initial Vector position is 0, 0
         this.setPos(0, 0);
     }
-    public Vector(double xPos, double yPos) {       //set position of object when created
+    public PVector(double xPos, double yPos) {       //set position of object when created
         this.setPos(xPos, yPos);
     }
     public void setPos(double xPos, double yPos) {  //set position when needed
@@ -25,7 +25,7 @@ public class Vector {
     public void setSize(double S) {
         double currentSize = this.getSize();
         if(currentSize==0) {        //check if vector is 0
-            return;
+            this.setPos(S, 0);
         }
         else{
             this.mult(1/currentSize);       //handles if previous vector exists
