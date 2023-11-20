@@ -1,4 +1,5 @@
 public class AsteroidFactory {
+    AsteroidDestroyer asteroidDestroyer;    //to make new asteroids that are smaller
     public static Asteroid getAsteroid(int lvl) {
 
         //need to randomly generate position and velocity btw
@@ -32,6 +33,7 @@ public class AsteroidFactory {
             return null;
         }
     }
+
 
 
 }
