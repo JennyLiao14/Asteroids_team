@@ -49,33 +49,38 @@ public class Main extends Application {     //contains graphics, inputs and game
         Image image = new Image("file:src/Images/MicrosoftTeams-image.png");
 
 // Create an ImageView and set its size
-        ImageView player = new ImageView(image);
-        player.setFitWidth(100);
-        player.setFitHeight(100);
-        player.setPreserveRatio(true);
+        //ImageView player = new ImageView(image);
+        //player.setFitWidth(100);
+        //player.setFitHeight(100);
+        // player.setPreserveRatio(true);
 
 // Add the ImageView to the layout
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(player);
-        root.setTop(stackPane);
+        //StackPane stackPane = new StackPane();
+        //stackPane.getChildren().add(player);
+        //root.setTop(stackPane);
+        PVector playerPosition = new PVector(400, 300);
+        Player player = new Player(1, playerPosition);
 
-        double[] playerPosition = {400, 300}; // Starting position in the middle of the canvas
-        double[] playerRotation = {0}; // Starting rotation
-
+        //double[] playerPosition = {400, 300}; // Starting position in the middle of the canvas
+        //double[] playerRotation = {0}; // Starting rotation
 
         mainScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.W) {
                 // Move up
-                playerPosition[1] -= 5; // This is a simple upward movement, adjust the value as needed
+
+                player.accelerate();            //FIX ACCELERATION CODE
             } else if (event.getCode() == KeyCode.D) {
                 // Rotate right
-                playerRotation[0] += 5; // Adjust the rotation step as needed
+                player.turnRight();
             } else if (event.getCode() == KeyCode.A) {
                 // Rotate left
-                playerRotation[0] -= 5; // Adjust the rotation step as needed
+                player.turnLeft();
             }
 
         });
+        player.move();
+        player.deccelerate();
+
 
 //creating the game loop
         new AnimationTimer() {
@@ -85,19 +90,14 @@ public class Main extends Application {     //contains graphics, inputs and game
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
                 // Update player's position and rotation based on key inputs
-                player.setRotate(playerRotation[0]);
-
-                // Translate and rotate graphics context to draw the player
                 gc.save();
-                gc.translate(playerPosition[0], playerPosition[1]);
-                gc.rotate(playerRotation[0]);
-                gc.drawImage(image, -player.getFitWidth() / 2, -player.getFitHeight() / 2, player.getFitWidth(), player.getFitHeight());
+                gc.translate(player.getPos().getX(), player.getPos().getY());
+                gc.rotate(player.getRotation());
+                // Draw the image with its center at the origin (the new translated and rotated point)
+                gc.drawImage(image, -100 / 2, -100 / 2, 100, 100); // Use hardcoded size since ImageView is no longer used
                 gc.restore();
             }
         }.start();
-
-// Set the initial focus to the scene to receive key inputs
-        mainScene.getRoot().requestFocus();
 
 
         primaryStage.show();

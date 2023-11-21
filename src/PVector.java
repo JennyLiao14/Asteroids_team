@@ -20,12 +20,12 @@ public class PVector {
         y *= xyMul;
     }
     public double getSize() {                        //returns size of vector based on xpos and ypos using pythagorean
-        return Math.sqrt(x*x + y*y);
+        return Math.abs(Math.sqrt(x*x + y*y));
     }
     public void setSize(double S) {
         double currentSize = this.getSize();
         if(currentSize==0) {        //check if vector is 0
-            this.setPos(S, 0);
+            setPos(S, 0);
         }
         else{
             this.mult(1/currentSize);       //handles if previous vector exists
@@ -40,8 +40,10 @@ public class PVector {
         while (angle <= 0) {
             double temp = Math.abs(angle);
             angle = 360 - temp;
+            System.out.println(angle); //good until here
         }
         while (angle >=360) {
+            System.out.println("ji");
             angle -= 360;
         }
 
@@ -62,8 +64,9 @@ public class PVector {
         if (angle >= 270 && angle < 360) {
             x = Math.abs(size * Math.cos(angleinRad));
             y = -Math.abs(size * Math.sin(angleinRad));
+            System.out.println("hi");
         }
-
+        System.out.println(angle);
 
     }
     public double getX() {
