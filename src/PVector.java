@@ -43,7 +43,6 @@ public class PVector {
             System.out.println(angle); //good until here
         }
         while (angle >=360) {
-            System.out.println("ji");
             angle -= 360;
         }
 
@@ -64,7 +63,6 @@ public class PVector {
         if (angle >= 270 && angle < 360) {
             x = Math.abs(size * Math.cos(angleinRad));
             y = -Math.abs(size * Math.sin(angleinRad));
-            System.out.println("hi");
         }
         System.out.println(angle);
 

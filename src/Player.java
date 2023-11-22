@@ -16,15 +16,15 @@ public class Player extends Entity{
     }
     public Player(int level, PVector pos) {
         this.position= pos;
-        this.velocity = new PVector(5, 5);
+        this.velocity = new PVector(0, 0);
         this.rotation = 0;
         lvl = level;
 
     }
     public void accelerate() {
 
-        if(velocity.getSize() <= 15) {
-            velocity.setSize(velocity.getSize()+0.05);
+        if(velocity.getSize() <= 5) {
+            velocity.setSize(velocity.getSize()+0.5);
         }
         else{
             velocity.setSize(velocity.getSize());
@@ -63,4 +63,6 @@ public class Player extends Entity{
     public PVector getPos() {
         return position;
     }
+
+
 }
