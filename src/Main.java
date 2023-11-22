@@ -78,8 +78,7 @@ public class Main extends Application {     //contains graphics, inputs and game
             }
 
         });
-        player.move();
-        player.deccelerate();
+
 
 
 //creating the game loop
@@ -92,10 +91,14 @@ public class Main extends Application {     //contains graphics, inputs and game
                 // Update player's position and rotation based on key inputs
                 gc.save();
                 gc.translate(player.getPos().getX(), player.getPos().getY());
+                //System.out.println("Player Position = " + player.getPos().getX());
                 gc.rotate(player.getRotation());
                 // Draw the image with its center at the origin (the new translated and rotated point)
                 gc.drawImage(image, -100 / 2, -100 / 2, 100, 100); // Use hardcoded size since ImageView is no longer used
                 gc.restore();
+
+                player.move();
+                player.deccelerate();
             }
         }.start();
 
