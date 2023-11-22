@@ -3,7 +3,7 @@ public class AsteroidGenerator {
 
     public boolean checkIfGenerate(double prob) {
         probability = prob;
-        double temp = Math.random();
+        double temp = Math.random()*1000+1;
         if(temp < probability) {
             return true;
         }

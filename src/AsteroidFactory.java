@@ -1,37 +1,35 @@
 public class AsteroidFactory {
-    AsteroidDestroyer asteroidDestroyer;    //to make new asteroids that are smaller
-    public static Asteroid getAsteroid(int lvl) {
 
-        //need to randomly generate position and velocity btw
-        if (lvl == 1) {
-            System.out.println("very small asteroid");
-            return new Asteroid(1);
-        } else if (lvl == 2) {
-            System.out.println("small asteroid");
-            return new Asteroid(2);
-        } else if (lvl == 3) {
-            System.out.println("asteroid");
-            return new Asteroid(3);
+    public static Asteroid getAsteroid(int lvl) {
+        int side = (int)(Math.random()*3+1);    //side of which the asteroid is generated on the screen (hidden)
+        if(side==1) {
+            double xPos = Math.random()*1400 - 200;
+            double yPos = Math.random()* 100 - 200;
+            double angle = Math.random()*180;
+            return new Asteroid(lvl, xPos, yPos, angle);
         }
-        else {
-            return null;
+        else if(side==2) {
+            double xPos = Math.random()*200 +800;
+            double yPos = Math.random()* 1000 - 200;
+            double angle = Math.random()*180 +90;
+            return new Asteroid(lvl, xPos, yPos, angle);
+        }else if(side==3) {
+            double xPos = Math.random()*1200 - 200;
+            double yPos = Math.random()* 200 + 600;
+            double angle = Math.random()* 180 + 180;
+            return new Asteroid(lvl, xPos, yPos, angle);
+        } else {
+            double xPos = Math.random()*200 -200;
+            double yPos = Math.random()*1000 -200;
+            double angle = Math.random()*180 - 90;
+            return new Asteroid(lvl, xPos, yPos, angle);
         }
+
     }
 
-    public static Asteroid getAsteroid(int lvl, PVector pos, PVector v) {
-
-        if (lvl == 1) {
-            return new Asteroid(1, pos,v);
-        } else if (lvl == 2) {
-
-            return new Asteroid(2, pos, v);
-        } else if (lvl == 3) {
-            System.out.println("asteroid");
-            return new Asteroid(3, pos, v);
-        }
-        else {
-            return null;
-        }
+    public static Asteroid getAsteroid(double x, double y) {
+        double angle = Math.random()*360;
+        return new Asteroid(1, x, y, angle);
     }
 
 

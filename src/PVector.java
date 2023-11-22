@@ -49,8 +49,11 @@ public class PVector {
         double angleinRad = Math.toRadians(angle);
 
         if (angle >= 0 && angle < 90) {
+
             x = Math.abs(size * Math.cos(angleinRad));
             y = Math.abs(size * Math.sin(angleinRad));
+
+
         }
         else if (angle >= 90 && angle < 180) {
             x = -Math.abs(size * Math.cos(angleinRad));

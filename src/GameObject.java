@@ -1,14 +1,9 @@
-
 import javafx.scene.canvas.GraphicsContext;
-public abstract class Entity implements Collideable, Drawable, Moveable, Splittable{
+
+public abstract class GameObject implements Collideable, Drawable, Moveable{
     protected PVector position;
     protected PVector velocity;
     protected double rotation;
-    protected int lvl;
 
-
-
-    public abstract void move();
     public abstract void draw(GraphicsContext pen);
-
 }

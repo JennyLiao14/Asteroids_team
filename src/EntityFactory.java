@@ -6,6 +6,9 @@ public class EntityFactory {        //not making stuff
         else if(entityName.equals("Asteroid")) {
             return AsteroidFactory.getAsteroid(level);
         }
+        else if(entityName.equals("Power")) {
+            return AsteroidFactory.getAsteroid(level);
+        }
 
 
         else {

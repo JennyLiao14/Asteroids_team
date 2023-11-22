@@ -1,10 +1,11 @@
 public class AsteroidDestroyer {
     public Asteroid replaceAsteroid(int level, PVector pos) {
-        PVector v = new PVector();
-        v.setPos(Math.random()*0.5 + 0.1, Math.random()*0.5+0.1); //speed of asteroid
 
-        Asteroid a = AsteroidFactory.getAsteroid(level - 1, pos, v);
-        //randomly generate velocity
-        return a;
+        double angle = Math.random()*360;
+        return new Asteroid(level-1, pos.getX(), pos.getY(), angle);
+
+    }
+    public Asteroid enhanceAsteroid(int level, PVector pos, double angle) {
+        return new Asteroid(level+1, pos.getX(), pos.getY(), angle); //always give me 0? angle
     }
 }
