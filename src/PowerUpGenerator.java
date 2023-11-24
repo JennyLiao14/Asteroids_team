@@ -1,6 +1,7 @@
-public class AsteroidGenerator {
+public class PowerUpGenerator {
     public boolean checkIfGenerate(double prob) {
-        double temp = Math.random()*1000+1;
+
+        double temp = Math.random()*2000+1;
         if(temp < prob) {
             return true;
         }

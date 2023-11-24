@@ -1,5 +1,6 @@
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
+
 public class Asteroid extends Entity{
 
     private Image asteroidPicture;

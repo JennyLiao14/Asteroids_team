@@ -9,9 +9,8 @@ public class Player extends Entity{
         this.velocity = new PVector();
         this.rotation = 0;
         lvl = 1;
-        b = new ArrayList<Bullet>();
+        b = new ArrayList<>();
         user = new Image("file:src/Images/spaceship.png");
-
 
     }
     public Player(int level) {
@@ -25,6 +24,15 @@ public class Player extends Entity{
     }
     public Player(int level, PVector pos) {
         this.position= pos;
+        this.velocity = new PVector(0, 0);
+        this.rotation = 0;
+        lvl = level;
+        b = new ArrayList<Bullet>();
+        user = new Image("file:src/Images/spaceship.png");
+
+    }
+    public Player(int level, double x, double y) {
+        this.position= new PVector(x, y);
         this.velocity = new PVector(0, 0);
         this.rotation = 0;
         lvl = level;

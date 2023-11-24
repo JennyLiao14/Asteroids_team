@@ -21,32 +21,21 @@ import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
 public class Main extends Application {     //contains graphics, inputs and game loop. Will call on LvlHandler and SceneHandler to set up the game after choices completed
     private GraphicsContext gc;
-    private LevelOne l1;
+    private SceneHandler sceneHandler;
     public static void main(String[] args) {
         launch(args); //auto call start
     }
-
     public void start(Stage primaryStage) { //like a new main
-
         primaryStage.setTitle("Asteroids");//can have scene + can change scenes
-
         BorderPane root = new BorderPane();
         Scene mainScene = new Scene(root);
         primaryStage.setScene(mainScene);
         Canvas canvas = new Canvas(800, 600); //800, 600
         gc = canvas.getGraphicsContext2D();
         root.setCenter(canvas);
-
-
-        //testing classes (don't mind me)
-        Image image = new Image("file:src/Images/spaceship.png");
-        l1 = new LevelOne();
+        sceneHandler = new SceneHandler(1);
 
 // Create an ImageView and set its size
         //ImageView player = new ImageView(image);
@@ -58,76 +47,60 @@ public class Main extends Application {     //contains graphics, inputs and game
         //StackPane stackPane = new StackPane();
         //stackPane.getChildren().add(player);
         //root.setTop(stackPane);
-        PVector playerPosition = new PVector(400, 300);
-        Player player = new Player(1, playerPosition);
-
-
         mainScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.W) {
                 // Move up
-                player.accelerate();
-            } else if (event.getCode() == KeyCode.D) {
+                sceneHandler.getPlayer().accelerate();
+            }
+            else if (event.getCode() == KeyCode.D) {
                 // Rotate right
-                player.turnRight();
+                sceneHandler.getPlayer().turnRight();
             } else if (event.getCode() == KeyCode.A) {
                 // Rotate left
-                player.turnLeft();
+                sceneHandler.getPlayer().turnLeft();
             }
             else if (event.getCode() == KeyCode.M) {
                 //testing in progress
-                l1.replaceAsteroid(0);
+                sceneHandler.replaceAsteroid();
             }
             else if (event.getCode() == KeyCode.N) {
                 //testing in progress
-                l1.enhanceAsteroid(0);
+                sceneHandler.enhanceAsteroid();
             }
             if (event.getCode() == KeyCode.L) {
-
-                player.shoot();
+                sceneHandler.getPlayer().shoot();
             }
-
+            //level change testing
+            if (event.getCode() == KeyCode.I) { //level change test
+                sceneHandler = new SceneHandler(1);
+                System.out.println("Level 1");
+            }
+            if (event.getCode() == KeyCode.O) { //level change test
+                sceneHandler = new SceneHandler(2);
+                System.out.println("Level 2");
+            }
+            if (event.getCode() == KeyCode.P) { //level change test
+                sceneHandler = new SceneHandler(3);
+                System.out.println("Level 3");
+            }
         });
-
-
-
 //creating the game loop
         new AnimationTimer() {
             @Override
             public void handle(long now) {
                 // Clear the canvas
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
-                l1.summonAsteroid();
-                l1.draw(gc);
-                player.drawBul(gc);
+                sceneHandler.draw(gc);
                 // Update player's position and rotation based on key inputs
                 gc.save();
-                gc.translate(player.getPos().getX(), player.getPos().getY());
-
-
-                gc.rotate(player.getRotation());
+                gc.translate(sceneHandler.getPlayer().getPos().getX(), sceneHandler.getPlayer().getPos().getY());
+                gc.rotate(sceneHandler.getPlayer().getRotation());
                 // Draw the image with its center at the origin (the new translated and rotated point)
                 //gc.drawImage(image, -100 / 2, -100 / 2, 100, 100); // Use hardcoded size since ImageView is no longer used
-                player.draw(gc);
+                sceneHandler.drawPlayer(gc);
                 gc.restore();
-
-                if(player.getPos().getX() >= canvas.getWidth()) {
-                    player.setPos(-80, player.getPos().getY());
-                }
-                else if(player.getPos().getY() >= canvas.getHeight()) {
-                    player.setPos(player.getPos().getX(), -80);
-                }
-                else if(player.getPos().getX() <= -80) {
-                    player.setPos(canvas.getWidth(), player.getPos().getY());
-                }
-                else if(player.getPos().getY() <= -80) {
-                    player.setPos(player.getPos().getX(), canvas.getHeight());
-                }
-                player.deccelerate();
             }
         }.start();
-
-
         primaryStage.show();
     }
 }
