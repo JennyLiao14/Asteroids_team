@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main extends Application {     //contains graphics, inputs and game loop. Will call on LvlHandler and SceneHandler to set up the game after choices completed
     private GraphicsContext gc;
-    private SceneHandler sceneHandler;
+    private LvlHandler lvlHandler;
     public static void main(String[] args) {
         launch(args); //auto call start
     }
@@ -35,7 +35,7 @@ public class Main extends Application {     //contains graphics, inputs and game
         Canvas canvas = new Canvas(800, 600); //800, 600
         gc = canvas.getGraphicsContext2D();
         root.setCenter(canvas);
-        sceneHandler = new SceneHandler(1);
+        lvlHandler = new LvlHandler(1);
 
 // Create an ImageView and set its size
         //ImageView player = new ImageView(image);
@@ -50,37 +50,37 @@ public class Main extends Application {     //contains graphics, inputs and game
         mainScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.W) {
                 // Move up
-                sceneHandler.getPlayer().accelerate();
+                lvlHandler.getPlayer().accelerate();
             }
             else if (event.getCode() == KeyCode.D) {
                 // Rotate right
-                sceneHandler.getPlayer().turnRight();
+                lvlHandler.getPlayer().turnRight();
             } else if (event.getCode() == KeyCode.A) {
                 // Rotate left
-                sceneHandler.getPlayer().turnLeft();
+                lvlHandler.getPlayer().turnLeft();
             }
             else if (event.getCode() == KeyCode.M) {
                 //testing in progress
-                sceneHandler.replaceAsteroid();
+                lvlHandler.replaceAsteroid();
             }
             else if (event.getCode() == KeyCode.N) {
                 //testing in progress
-                sceneHandler.enhanceAsteroid();
+                lvlHandler.enhanceAsteroid();
             }
             if (event.getCode() == KeyCode.L) {
-                sceneHandler.getPlayer().shoot();
+                lvlHandler.getPlayer().shoot();
             }
             //level change testing
             if (event.getCode() == KeyCode.I) { //level change test
-                sceneHandler = new SceneHandler(1);
+                lvlHandler = new LvlHandler(1);
                 System.out.println("Level 1");
             }
             if (event.getCode() == KeyCode.O) { //level change test
-                sceneHandler = new SceneHandler(2);
+                lvlHandler = new LvlHandler(2);
                 System.out.println("Level 2");
             }
             if (event.getCode() == KeyCode.P) { //level change test
-                sceneHandler = new SceneHandler(3);
+                lvlHandler = new LvlHandler(3);
                 System.out.println("Level 3");
             }
         });
@@ -90,14 +90,14 @@ public class Main extends Application {     //contains graphics, inputs and game
             public void handle(long now) {
                 // Clear the canvas
                 gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-                sceneHandler.draw(gc);
+                lvlHandler.draw(gc);
                 // Update player's position and rotation based on key inputs
                 gc.save();
-                gc.translate(sceneHandler.getPlayer().getPos().getX(), sceneHandler.getPlayer().getPos().getY());
-                gc.rotate(sceneHandler.getPlayer().getRotation());
+                gc.translate(lvlHandler.getPlayer().getPos().getX(), lvlHandler.getPlayer().getPos().getY());
+                gc.rotate(lvlHandler.getPlayer().getRotation());
                 // Draw the image with its center at the origin (the new translated and rotated point)
                 //gc.drawImage(image, -100 / 2, -100 / 2, 100, 100); // Use hardcoded size since ImageView is no longer used
-                sceneHandler.drawPlayer(gc);
+                lvlHandler.drawPlayer(gc);
                 gc.restore();
             }
         }.start();
