@@ -40,7 +40,7 @@ public class PVector {
         while (angle <= 0) {
             double temp = Math.abs(angle);
             angle = 360 - temp;
-            System.out.println(angle); //good until here
+
         }
         while (angle >=360) {
             angle -= 360;
@@ -49,11 +49,8 @@ public class PVector {
         double angleinRad = Math.toRadians(angle);
 
         if (angle >= 0 && angle < 90) {
-
             x = Math.abs(size * Math.cos(angleinRad));
             y = Math.abs(size * Math.sin(angleinRad));
-
-
         }
         else if (angle >= 90 && angle < 180) {
             x = -Math.abs(size * Math.cos(angleinRad));
@@ -67,7 +64,7 @@ public class PVector {
             x = Math.abs(size * Math.cos(angleinRad));
             y = -Math.abs(size * Math.sin(angleinRad));
         }
-        System.out.println(angle);
+
 
     }
     public double getX() {

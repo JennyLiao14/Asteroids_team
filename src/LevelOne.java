@@ -1,10 +1,22 @@
 import javafx.scene.canvas.GraphicsContext;
 public class LevelOne extends Level{        //contains all the information about a specific level, (i,e probability of generating things.)
-    public void summonAsteroid() {  //contains levelOne probability of summoning asteroid
-        summonAsteroid(15, 1);
+    public static final int probAsteroid = 15;
+    public static final int probPower = 3;
+    public static final int probAlien = 0;
+
+    @Override
+    public int getLvl() {
+        return 1;
     }
-    public void summonPower() { //if collide with smt, it will disappear
-        summonPower(3);
+
+    public int getProbAsteroid() {
+        return probAsteroid;
+    }
+    public int getProbPower() {
+        return probPower;
+    }
+    public int getProbAlien() {
+        return probAlien;
     }
 
 }

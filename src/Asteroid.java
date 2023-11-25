@@ -44,8 +44,6 @@ public class Asteroid extends Entity{
         else if(level == 3) {
             asteroidPicture = new Image("file:src/Images/Icons_24.png");
         }
-        System.out.println(velocity.getX() + " - " + velocity.getY());
-
     }
     @Override
     public void move() {

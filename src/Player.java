@@ -50,8 +50,6 @@ public class Player extends Entity{
         }
         velocity.setAngle(rotation);
         rotation = velocity.getAngle();     //testing
-
-
     }
     public void deccelerate() {
         velocity.setSize(velocity.getSize()-0.01);
@@ -59,7 +57,6 @@ public class Player extends Entity{
     public void shoot() {
         Bullet temp = new Bullet(this.rotation, this.position.getX(), this.position.getY());
         b.add(temp);
-
     }
     public void turnRight() {
         rotation += 10;

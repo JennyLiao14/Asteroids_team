@@ -23,8 +23,9 @@ public class LvlHandler implements Drawable{      //depending on user input, wil
     }
     @Override
     public void draw(GraphicsContext pen) {
-        level.summonAsteroid(15, level.getLvl());
-        level.summonPower(3);
+        level.summonAsteroid(level.getProbAsteroid(), level.getLvl());
+        level.summonPower(level.getProbPower());
+        level.summonAlien(level.getProbAlien());
         level.draw(pen);
         player.drawBul(pen);
     }
@@ -44,7 +45,10 @@ public class LvlHandler implements Drawable{      //depending on user input, wil
             player.setPos(player.getPos().getX(), 600);
         }
         player.deccelerate();
+        level.setPlayerPos(player.getPos().getX(), player.getPos().getY());
     }
+
+
     public Player getPlayer() {
         return player;
     }

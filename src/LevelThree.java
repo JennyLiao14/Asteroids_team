@@ -1,11 +1,23 @@
-public class LevelThree extends Level{      //has aliens
-    public void summonAsteroid() {  //contains levelOne probability of summoning asteroid
-        summonAsteroid(50, 3);
-    }
-    public void summonPower() { //if collide with smt, it will disappear
-        summonPower(9);
-    }
+public class LevelThree extends Level{
+    public static final int probAsteroid = 0;
+    public static final int probPower = 3;
+    public static final int probAlien = 3;
     public int getLvl() {
         return 3;
+    }
+
+    @Override
+    public int getProbAsteroid() {
+        return probAsteroid;
+    }
+
+    @Override
+    public int getProbPower() {
+        return probPower;
+    }
+
+    @Override
+    public int getProbAlien() {
+        return probAlien;
     }
 }
