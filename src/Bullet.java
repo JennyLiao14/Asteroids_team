@@ -28,7 +28,7 @@ public class Bullet implements Moveable{
     }
     @Override
     public PVector getPos() {
-        return null;
+        return pos;
     }
 
     @Override

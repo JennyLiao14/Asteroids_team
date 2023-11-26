@@ -17,7 +17,7 @@ public class LvlHandler implements Drawable{      //depending on user input, wil
 
     public void replaceAsteroid() {
         level.replaceAsteroid(0);
-    }
+    }       //need index of collided/enhanced asteroid
     public void enhanceAsteroid() {
         level.enhanceAsteroid(0);
     }

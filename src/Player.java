@@ -58,6 +58,15 @@ public class Player extends Entity{
         Bullet temp = new Bullet(this.rotation, this.position.getX(), this.position.getY());
         b.add(temp);
     }
+    public void shootEnhanced() {
+        double tempAngle = 0;
+        while(tempAngle <= 360) {
+            Bullet temp = new Bullet(tempAngle, this.position.getX(), this.position.getY());
+            b.add(temp);
+            tempAngle +=20;
+        }
+
+    }
     public void turnRight() {
         rotation += 10;
     }
@@ -86,7 +95,15 @@ public class Player extends Entity{
         for(int i = 0; i < b.size(); i++) {
             b.get(i).move();
             b.get(i).draw(pen);
+
+            if(b.get(i).getPos().getX() >= 800 || b.get(i).getPos().getY() >= 610 || b.get(i).getPos().getX() <= -10 || b.get(i).getPos().getY() <= -10) {
+                b.remove(i);
+                i--;
+            }
+
+
         }
+
     }
 
     @Override

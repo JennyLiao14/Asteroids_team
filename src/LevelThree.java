@@ -1,5 +1,5 @@
 public class LevelThree extends Level{
-    public static final int probAsteroid = 0;
+    public static final int probAsteroid = 15;
     public static final int probPower = 3;
     public static final int probAlien = 3;
     public int getLvl() {

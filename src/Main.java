@@ -70,6 +70,10 @@ public class Main extends Application {     //contains graphics, inputs and game
             if (event.getCode() == KeyCode.L) {
                 lvlHandler.getPlayer().shoot();
             }
+            else if (event.getCode() == KeyCode.K) {
+                //would be same button as L but would call method that checks if player collided with powerUp already. if true, uses enhanced shoot
+                lvlHandler.getPlayer().shootEnhanced();
+            }
             //level change testing
             if (event.getCode() == KeyCode.I) { //level change test
                 lvlHandler = new LvlHandler(1);
