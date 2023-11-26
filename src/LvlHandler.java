@@ -1,8 +1,10 @@
 import javafx.scene.canvas.GraphicsContext;
 public class LvlHandler implements Drawable{      //depending on user input, will "create" a certain level using the level Factory
-    LvlFactory levelFactory = new LvlFactory();
-    Level level;
+    private final LvlFactory levelFactory = new LvlFactory();
+    private Level level;
     protected Player player;
+    private final CollisionHandler collisionHandler = new CollisionHandler();   //uses to check collisions between everything
+
 
 
 
