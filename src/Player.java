@@ -1,43 +1,16 @@
 import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-public class Player extends Entity{
-    private ArrayList<Bullet> b;
-    private Image user;
-    public Player() {
-        this.position= new PVector();
-        this.velocity = new PVector();
-        this.rotation = 0;
-        lvl = 1;
-        b = new ArrayList<>();
-        user = new Image("file:src/Images/spaceship.png");
+public class Player extends Shooters{
 
-    }
-    public Player(int level) {
-        this.position= new PVector();
-        this.velocity = new PVector();
-        this.rotation = 0;
-        lvl = level;
-        b = new ArrayList<Bullet>();
-        user = new Image("file:src/Images/spaceship.png");
-
-    }
-    public Player(int level, PVector pos) {
-        this.position= pos;
-        this.velocity = new PVector(0, 0);
-        this.rotation = 0;
-        lvl = level;
-        b = new ArrayList<Bullet>();
-        user = new Image("file:src/Images/spaceship.png");
-
-    }
+    private Image user = new Image("file:src/Images/spaceship.png");
     public Player(int level, double x, double y) {
+        size = 80;
         this.position= new PVector(x, y);
         this.velocity = new PVector(0, 0);
         this.rotation = 0;
         lvl = level;
-        b = new ArrayList<Bullet>();
-        user = new Image("file:src/Images/spaceship.png");
+        b = new ArrayList<>();
 
     }
     public void accelerate() {
@@ -73,56 +46,43 @@ public class Player extends Entity{
     public void turnLeft() {
         rotation -= 10;
     }
-    public double getRotation() {
-        return rotation;
-    }
-
 
     @Override
     public void move() {
-
-        position.add(velocity.getX(), velocity.getY());
+        super.move();
         for(int i = 0; i < b.size(); i++) {
             b.get(i).move();
         }
     }
     public void draw(GraphicsContext pen) {
         move();
-        pen.drawImage(user, -100 / 2, -100 / 2, 100, 100);
+        pen.drawImage(user, -size/2, -size/2, size, size);
 
     }
     public void drawBul(GraphicsContext pen) {
         for(int i = 0; i < b.size(); i++) {
             b.get(i).move();
             b.get(i).draw(pen);
-
             if(b.get(i).getPos().getX() >= 800 || b.get(i).getPos().getY() >= 610 || b.get(i).getPos().getX() <= -10 || b.get(i).getPos().getY() <= -10) {
                 b.remove(i);
                 i--;
             }
-
-
         }
-
     }
+    public void setPos(double x, double y) { position = new PVector(x, y);}
 
     @Override
-    public int getLevel() {
-        return lvl;
+    public boolean isColliding(GameObject other) {
+        PVector otherPosition = other.getPos();
+        double otherRadius = other.getSize();
+
+        double dx = position.getX() - otherPosition.getX();
+        double dy = position.getY() - otherPosition.getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+
+        return distance < ((double) this.getSize() /2 + otherRadius/2);
     }
-
-    @Override
-    public PVector getPos() {
-        return position;
-    }
-
-    @Override
-    public double getAngle() {
-        return rotation;
-    }
-
-    public void setPos(double x, double y) {
-        position = new PVector(x, y);
-
+    public ArrayList<Bullet> getBullets() {
+        return b;
     }
 }

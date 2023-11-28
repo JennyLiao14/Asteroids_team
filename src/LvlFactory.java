@@ -10,7 +10,7 @@ public class LvlFactory {        //creates the level object of a certain level (
             return new LevelThree();
         }
         else {
-            return null;
+            return new LevelOne();
         }
     }
 }

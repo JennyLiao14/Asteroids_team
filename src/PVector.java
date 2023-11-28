@@ -32,22 +32,17 @@ public class PVector {
             this.mult(S);                          //changes vector size
         }
     }
-    public double getAngle() {
-        return Math.toDegrees(Math.atan2(this.y, this.x));      //diff format so that signs don't cancel out
-    }
+    public double getAngle() {return Math.toDegrees(Math.atan2(this.y, this.x));}
     public void setAngle(double angle) {      //angle in deg  //find new values of x and y, given fixed value of size
         double size = this.getSize();
         while (angle <= 0) {
             double temp = Math.abs(angle);
             angle = 360 - temp;
-
         }
         while (angle >=360) {
             angle -= 360;
         }
-
         double angleinRad = Math.toRadians(angle);
-
         if (angle >= 0 && angle < 90) {
             x = Math.abs(size * Math.cos(angleinRad));
             y = Math.abs(size * Math.sin(angleinRad));
@@ -64,16 +59,8 @@ public class PVector {
             x = Math.abs(size * Math.cos(angleinRad));
             y = -Math.abs(size * Math.sin(angleinRad));
         }
-
-
     }
-    public double getX() {
-        return x;
-
-    }
-    public double getY() {
-        return y;
-
-    }
+    public double getX() {return x;}
+    public double getY() {return y;}
 
 }

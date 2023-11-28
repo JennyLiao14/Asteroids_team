@@ -1,6 +1,6 @@
 public class LevelTwo extends Level{
     public static final int probAsteroid = 30;
-    public static final int probPower = 6;
+    public static final int probPower = 5;
     public static final int probAlien = 1;
     public int getLvl() {
         return 2;

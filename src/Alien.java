@@ -3,19 +3,17 @@ import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 
-public class Alien extends Entity{
-    private ArrayList<Bullet> b;
+public class Alien extends Shooters{
 
-    private Image alienPicture;
     public Alien(double x, double y, double angle) {
         position = new PVector(x, y);
         velocity = new PVector(0, 0);
-        alienPicture = new Image("file:src/Images/Icons_22.png");
+        picture = new Image("file:src/Images/Icons_22.png");
         velocity.setSize(Math.random()*3+0.5);
         velocity.setAngle(angle);
         b = new ArrayList<>();
-
-
+        size = 50;
+        lvl = 1;
     }
     public void shoot(double xPlayer, double yPlayer) { //takes player position
         double a = Math.atan2(yPlayer-position.getY(), xPlayer-position.getX());
@@ -25,13 +23,7 @@ public class Alien extends Entity{
         b.add(temp);
 
     }
-    @Override
-    public void move() {
-        position.add(velocity.getX(), velocity.getY());
-    }
-    public PVector getPos() {
-        return position;
-    }
+
     public double getAngle() {
         return velocity.getAngle();
 
@@ -42,7 +34,7 @@ public class Alien extends Entity{
 
     }
     public void draw(GraphicsContext pen) {
-        pen.drawImage(alienPicture, position.getX(), position.getY(), 50, 50);
+        pen.drawImage(picture, position.getX(), position.getY(), size, size);
         for(int i = 0; i < b.size(); i++) {
             b.get(i).move();
             b.get(i).draw(pen);
@@ -50,7 +42,10 @@ public class Alien extends Entity{
     }
 
     @Override
-    public int getLevel() {
-        return 1;
+    public boolean isColliding(GameObject other) {
+        return false;
+    }
+    public ArrayList<Bullet> getBullets() {
+        return b;
     }
 }

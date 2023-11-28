@@ -5,9 +5,7 @@ public class LevelOne extends Level{        //contains all the information about
     public static final int probAlien = 0;
 
     @Override
-    public int getLvl() {
-        return 1;
-    }
+    public int getLvl() {return 1;}
 
     public int getProbAsteroid() {
         return probAsteroid;

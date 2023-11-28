@@ -8,17 +8,6 @@ public class LevelGenerator {
         max = 3;
         range = max-min+1;
     }
-    public LevelGenerator(int min, int max) {
-        this.min = min;
-        this.max = max;
-        range = this.max-this.min+1;
-
-    }
-
-    public int generateLvl() {
-
-        return (int)(Math.random()*range)+min;
-    }
     public int generateLvl(int lvl) {       //advanced levels have higher lvl rates
         if(lvl == 1) {
             return (int)(Math.random()*range)+min;
@@ -27,7 +16,6 @@ public class LevelGenerator {
             min = 2;
             range = 2;
             return (int)(Math.random()*range)+min;
-
         }
         else if (lvl == 3) {
             min = 3;

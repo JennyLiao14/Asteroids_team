@@ -17,18 +17,16 @@ public abstract class Level extends LevelVariables{   //contains all the require
         boolean generated = alienGenerator.checkIfGenerate(prob);
         if(generated) {
             aliens.add(alienFactory.getAlien());
-            System.out.println("alien");
         }
     }
-
     public void summonPower(int prob) { //if collide with smt, it will disappear
-
         boolean generated = powerUpGenerator.checkIfGenerate(prob);
         if(generated) {
             powers.add(powerFactory.getPower());
         }
     }
-    public void replaceAsteroid(int index) { //if gun collide with asteroid return true, index of asteroid in array
+    public void replaceAsteroid(double tempIndex) { //if gun collide with asteroid return true, index of asteroid in array
+        int index = (int)tempIndex;
         if(entity.get(index).getLevel() != 1) {
             entity.add(asteroidDestroyer.replaceAsteroid(entity.get(index).getLevel(), entity.get(index).getPos()));
             entity.add(asteroidDestroyer.replaceAsteroid(entity.get(index).getLevel(), entity.get(index).getPos()));
@@ -48,15 +46,15 @@ public abstract class Level extends LevelVariables{   //contains all the require
             }
         }
     }
-    //might run into pitfall (i.e, remove one but not
     public void draw(GraphicsContext pen) {
         for(int i = 0; i < entity.size(); i++) {
             entity.get(i).move();
             entity.get(i).draw(pen);
-            if(entity.get(i).getPos().getX() >= 1200 || entity.get(i).getPos().getY() >= 1000 || entity.get(i).getPos().getX() <= -400 || entity.get(i).getPos().getY() <= -400) {
+            if(boundaryHandler.checkAsteroid(entity.get(i))) {
                 entity.remove(i);
                 i--;
             }
+
         }
         for(int i = 0; i < powers.size(); i++) {
             powers.get(i).draw(pen);
@@ -64,16 +62,15 @@ public abstract class Level extends LevelVariables{   //contains all the require
         for(int i = 0; i < aliens.size(); i++) {        //angles prob incorrect, keep making new aliens
             aliens.get(i).move();
             aliens.get(i).draw(pen);
-            if(aliens.get(i).getPos().getX() > 750 || aliens.get(i).getPos().getY() > 550 || aliens.get(i).getPos().getX() < 0 || aliens.get(i).getPos().getY() < 0) {
+            if(boundaryHandler.checkAlien(aliens.get(i))) {
                 aliens.get(i).setAngle(alienFactory.getAngle(aliens.get(i).getPos().getX(), aliens.get(i).getPos().getY()));
                 aliens.get(i).move();
-                //double temp = Math.random()*100+1;
-                //if(temp > 80) {
-                    aliens.get(i).shoot(playerX, playerY);
-               // }
-
+                aliens.get(i).shoot(playerX, playerY);
             }
         }
+
+
+
     }
     public void setPlayerPos(double x, double y) {
         playerX = x;
@@ -83,8 +80,14 @@ public abstract class Level extends LevelVariables{   //contains all the require
     public abstract int getProbAsteroid();
     public abstract int getProbPower();
     public abstract int getProbAlien();
-
-
-
+    public ArrayList<Asteroid> getAsteroids() {
+        return entity;
+    }
+    public ArrayList<PowerUp> getPowerUps() {
+        return powers;
+    }
+    public ArrayList<Alien> getAliens() {
+        return aliens;
+    }
 
 }

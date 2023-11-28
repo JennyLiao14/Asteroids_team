@@ -98,7 +98,7 @@ public class Main extends Application {     //contains graphics, inputs and game
                 // Update player's position and rotation based on key inputs
                 gc.save();
                 gc.translate(lvlHandler.getPlayer().getPos().getX(), lvlHandler.getPlayer().getPos().getY());
-                gc.rotate(lvlHandler.getPlayer().getRotation());
+                gc.rotate(lvlHandler.getPlayer().getAngle());
                 // Draw the image with its center at the origin (the new translated and rotated point)
                 //gc.drawImage(image, -100 / 2, -100 / 2, 100, 100); // Use hardcoded size since ImageView is no longer used
                 lvlHandler.drawPlayer(gc);

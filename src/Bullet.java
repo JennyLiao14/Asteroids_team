@@ -1,50 +1,32 @@
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-public class Bullet implements Moveable{
-    private PVector pos;
-    private PVector velocity;
-    private double rotation;
-    private Image b;
+public class Bullet extends Entity{
     public Bullet(double rot, double x, double y) {
-
-        b = new Image("images/spaceship.png");
-        pos = new PVector(x, y);
+        size = 20;
+        picture = new Image("images/spaceship.png");
+        position = new PVector(x, y);
         velocity = new PVector();
-        velocity.setSize(2);
+        velocity.setSize(5);
         rotation = rot;
         velocity.setAngle(rotation);
-
-
+        lvl = 1;
     }
-    public Bullet() {
-
-        b = new Image("images/spaceship.png");
-        pos = new PVector(0, 0);
-        velocity = new PVector();
-        velocity.setSize(2);
-        System.out.println("x " + pos.getX());
-        System.out.println("y " +pos.getY());
-
-    }
-    @Override
-    public PVector getPos() {
-        return pos;
-    }
-
-    @Override
-    public double getAngle() {
-        return rotation;
-    }
-
-    public void draw(GraphicsContext pen) {
-        pen.drawImage(b, pos.getX(), pos.getY(), 20, 20);
-
-    }
-    public void move() {
-        pos.add(velocity.getX(), velocity.getY());
+    public void draw(GraphicsContext pen) {pen.drawImage(picture, position.getX(), position.getY(), size, size);
     }
     public void setRotation(double r) {
         rotation = r;
         velocity.setAngle(rotation);
+    }
+
+    @Override
+    public boolean isColliding(GameObject other) {
+        PVector otherPosition = other.getPos();
+        double otherRadius = other.getSize();
+
+        double dx = position.getX() - otherPosition.getX();
+        double dy = position.getY() - otherPosition.getY();
+        double distance = Math.sqrt(dx * dx + dy * dy);
+
+        return distance < ((double) this.getSize() /2 + otherRadius/2);
     }
 }
